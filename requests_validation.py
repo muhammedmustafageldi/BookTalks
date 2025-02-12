@@ -1,5 +1,5 @@
 from typing import Optional
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, EmailStr
 
 class BookRequest(BaseModel):
     id: Optional[int] = Field(description='Id is not needed on create', default=None)
@@ -10,26 +10,13 @@ class BookRequest(BaseModel):
     published_date: int = Field(gt=0)
     image_path: Optional[str] = None
 
-    model_config = {
-        "json_schema_extra": {
-            "example": {
-                "title": "Python Programming Basics",
-                "author_id": 1,
-                "description": "A comprehensive guide to learning Python programming.",
-                "rating": 5,
-                "published_date": 2023
-            }
-        }
-    }
 
 class AuthorRequest(BaseModel):
     id: Optional[int] = Field(description='Id is not needed on create', default=None)
     name: str = Field(min_length=5)
 
-    model_config = {
-        "json_schema_extra": {
-            "example": {
-                "name": "Halit Ziya Uşaklıgil"
-            }
-        }
-    }
+
+class AuthRequest(BaseModel):
+    email: EmailStr = Field(min_length=10)
+    username: str = Field(min_length=5)
+    password: str = Field(min_length=6)

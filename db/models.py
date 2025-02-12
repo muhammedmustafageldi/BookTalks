@@ -1,4 +1,5 @@
-from database import Base
+from pydantic import BaseModel
+from db.database import Base
 from sqlalchemy import Column, Integer, String, ForeignKey
 
 class User(Base):
@@ -9,6 +10,12 @@ class User(Base):
     username = Column(String, nullable=False, unique=True)
     hashed_password = Column(String, nullable=False)
     role = Column(String, default="user")
+
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
 
 class Book(Base):
     __tablename__ = 'books'

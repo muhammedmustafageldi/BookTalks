@@ -3,13 +3,13 @@ import os
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form
 from sqlalchemy.orm import Session
 from pydantic import ValidationError
-from database import SessionLocal
+from db.database import SessionLocal
 from requests_validation import BookRequest
 from helpers import generate_unique_filename
 from starlette import status
-from models import Book
+from db.models import Book
 
-router = APIRouter(tags=["Books"])
+router = APIRouter(tags=["Books"], prefix="/books")
 
 BOOKS_DIR = os.path.join('uploaded_images/books')
 
@@ -22,7 +22,7 @@ def get_db():
 
 Db_Dependency = Annotated[Session, Depends(get_db)]
 
-@router.get("/books", status_code=status.HTTP_200_OK)
+@router.get("", status_code=status.HTTP_200_OK)
 async def get_all_books(db: Db_Dependency):
     return db.query(Book).all()
 

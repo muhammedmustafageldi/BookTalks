@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-from models import Base
-from database import engine
+from db.models import Base
+from db.database import engine
 from fastapi.staticfiles import StaticFiles
 from routers import auth, books, authors
 

@@ -2,14 +2,14 @@ from fastapi import APIRouter, Depends, HTTPException, Form, UploadFile, File
 import os
 from sqlalchemy.orm import Session
 from starlette import status
-from database import SessionLocal
+from db.database import SessionLocal
 from typing import Annotated
-from models import Author
+from db.models import Author
 from requests_validation import AuthorRequest
 from pydantic import ValidationError
 from helpers import generate_unique_filename
 
-router = APIRouter(tags=["Authors"])
+router = APIRouter(tags=["Authors"], prefix="/authors")
 
 AUTHORS_DIR = os.path.join('uploaded_images/authors')
 
@@ -22,7 +22,7 @@ def get_db():
 
 Db_Dependency = Annotated[Session, Depends(get_db)]
 
-@router.get("/authors", status_code=status.HTTP_200_OK)
+@router.get("", status_code=status.HTTP_200_OK)
 async def get_all_authors(db: Db_Dependency):
     return db.query(Author).all()
 
