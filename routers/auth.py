@@ -4,7 +4,8 @@ from db.database import SessionLocal
 from sqlalchemy.orm import Session
 from requests_validation import AuthRequest
 from starlette import status
-from db.models import User, Token
+from db.models import User
+from requests_validation import Token
 from passlib.context import CryptContext
 from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
 from jose import jwt, JWTError
@@ -40,6 +41,15 @@ async def create_user(db: Db_Dependency, create_user_request: AuthRequest):
     db.refresh(create_user_model)
 
 
+@router.post("/token", response_model=Token, status_code=status.HTTP_200_OK)
+async def login_for_access_token(form_data: Annotated[OAuth2PasswordRequestForm, Depends()], db: Db_Dependency):
+    user = authenticate_user(form_data.username, form_data.password, db)
+    if not user:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Failed authentication.")
+    token = create_access_token(user.username, user.id, user.role, timedelta(minutes=20))
+    return {"access_token": token, "token_type": "bearer"}
+
+
 def authenticate_user(username: str, password: str, db):
     user = db.query(User).filter(User.username == username).first()
     if not user:
@@ -54,15 +64,6 @@ def create_access_token(username: str, user_id: int, role: str, expires_delta: t
     expires = datetime.now(timezone.utc) + expires_delta
     payload.update({'exp': expires})
     return jwt.encode(payload, SECRET_KEY, algorithm=ALGORITHM)
-
-
-@router.post("/token", response_model=Token, status_code=status.HTTP_200_OK)
-async def login_for_access_token(form_data: Annotated[OAuth2PasswordRequestForm, Depends()], db: Db_Dependency):
-    user = authenticate_user(form_data.username, form_data.password, db)
-    if not user:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Failed authentication.")
-    token = create_access_token(user.username, user.id, user.role, timedelta(minutes=20))
-    return {"access_token": token, "token_type": "bearer"}
 
 
 async def validate_current_user(token: Annotated[str, Depends(oauth2_bearer)]):

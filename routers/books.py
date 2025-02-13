@@ -8,6 +8,8 @@ from requests_validation import BookRequest
 from helpers import generate_unique_filename
 from starlette import status
 from db.models import Book
+from routers.auth import validate_current_user
+
 
 router = APIRouter(tags=["Books"], prefix="/books")
 
@@ -21,14 +23,20 @@ def get_db():
         db.close()
 
 Db_Dependency = Annotated[Session, Depends(get_db)]
+user_dependency = Annotated[dict, Depends(validate_current_user)]
 
 @router.get("", status_code=status.HTTP_200_OK)
-async def get_all_books(db: Db_Dependency):
+async def get_all_books(user: user_dependency ,db: Db_Dependency):
+    if user is None:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
     return db.query(Book).all()
 
 @router.post("/add_new_book/", status_code=status.HTTP_201_CREATED)
-async def add_new_book(db: Db_Dependency,image: UploadFile = File(...),title: str = Form(...),description: str = Form(...),author_id: int = Form(gt=0),rating: int = Form(...),published_date: int = Form(...)
+async def add_new_book(user: user_dependency, db: Db_Dependency,image: UploadFile = File(...),title: str = Form(...),description: str = Form(...),author_id: int = Form(gt=0),rating: int = Form(...),published_date: int = Form(...)
 ):
+    # Validate user is admin
+    if user is None or user.get('role') != 'admin':
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='This request can only be made by admins.')
     # Validate incoming Form fields with Pydantic Model
     try:
         book_request = BookRequest(

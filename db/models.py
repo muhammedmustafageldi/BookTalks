@@ -12,11 +12,6 @@ class User(Base):
     role = Column(String, default="user")
 
 
-class Token(BaseModel):
-    access_token: str
-    token_type: str
-
-
 class Book(Base):
     __tablename__ = 'books'
 

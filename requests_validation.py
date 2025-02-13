@@ -1,5 +1,5 @@
 from typing import Optional
-from pydantic import BaseModel, Field, EmailStr
+from pydantic import BaseModel, Field, EmailStr, field_validator
 
 class BookRequest(BaseModel):
     id: Optional[int] = Field(description='Id is not needed on create', default=None)
@@ -20,3 +20,13 @@ class AuthRequest(BaseModel):
     email: EmailStr = Field(min_length=10)
     username: str = Field(min_length=5)
     password: str = Field(min_length=6)
+
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+class PasswordUpdateRequest(BaseModel):
+    old_password: str = Field(..., min_length=6)
+    new_password: str = Field(..., min_length=6)
+    confirm_new_password: str = Field(..., min_length=6)
