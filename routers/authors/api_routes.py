@@ -30,10 +30,10 @@ async def get_all_authors(db: Db_Dependency):
     return repository.get_all_author(db)
 
 @router.post("/add_new_author/", status_code=status.HTTP_201_CREATED)
-async def add_new_author(db: Db_Dependency, name: str = Form(), image: UploadFile = File(...)):
+async def add_new_author(db: Db_Dependency, name: str = Form(), author_info: str = Form(...) ,image: UploadFile = File(...)):
     # Validate incoming Form fields with Pydantic Model
     try:
-        author_request = AuthorRequest(name=name)
+        author_request = AuthorRequest(name=name, author_info=author_info)
     except ValidationError as e:
         # Return validation messages if there is erroneous data
         raise HTTPException(status_code=422, detail=e.errors())
@@ -45,7 +45,7 @@ async def add_new_author(db: Db_Dependency, name: str = Form(), image: UploadFil
         with open(file_path, "wb") as buffer:
             buffer.write(await image.read())
 
-        new_author = Author(name=author_request.name, image_path=file_path)
+        new_author = Author(name=author_request.name, image_path=file_path, author_info=author_request.author_info)
 
         # Add author to database ->
         repository.add_author(db, new_author)

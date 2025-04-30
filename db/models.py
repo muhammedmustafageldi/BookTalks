@@ -23,10 +23,12 @@ class Book(Base):
     published_date = Column(Integer, nullable=False)
     image_path = Column(String, default=None)
     page_count = Column(Integer, nullable=False)
+    admin_opinion = Column(String, nullable=False)
 
 class Author(Base):
     __tablename__ = 'authors'
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, nullable=False)
+    author_info = Column(String, nullable=False)
     image_path = Column(String, default=None)

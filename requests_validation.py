@@ -10,11 +10,13 @@ class BookRequest(BaseModel):
     published_date: int = Field(gt=0)
     image_path: Optional[str] = None
     page_count: int = Field(gt=0)
+    admin_opinion: str = Field(min_length=1, max_length=300)
 
 
 class AuthorRequest(BaseModel):
     id: Optional[int] = Field(description='Id is not needed on create', default=None)
     name: str = Field(min_length=5)
+    author_info: str = Field(min_length=1, max_length=450)
 
 
 class AuthRequest(BaseModel):

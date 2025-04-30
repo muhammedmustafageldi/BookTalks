@@ -37,7 +37,7 @@ async def get_all_books(user: user_dependency ,db: Db_Dependency):
     return repository.get_all_books(db)
 
 @router.post("/add_new_book/", status_code=status.HTTP_201_CREATED)
-async def add_new_book(user: user_dependency, db: Db_Dependency,image: UploadFile = File(...),title: str = Form(...),description: str = Form(...),author_id: int = Form(gt=0),rating: int = Form(...),published_date: int = Form(...), page_count: int = Form(...)
+async def add_new_book(user: user_dependency, db: Db_Dependency,image: UploadFile = File(...),title: str = Form(...),description: str = Form(...),author_id: int = Form(gt=0),rating: int = Form(...),published_date: int = Form(...), page_count: int = Form(...), admin_opinion: str = Form(...)
 ):
     # Validate user is admin
     if user is None or user.get('role') != 'admin':
@@ -50,7 +50,8 @@ async def add_new_book(user: user_dependency, db: Db_Dependency,image: UploadFil
             author_id=author_id,
             rating=rating,
             published_date=published_date,
-            page_count=page_count
+            page_count=page_count,
+            admin_opinion=admin_opinion
         )
     except ValidationError as e:
         raise HTTPException(status_code=422, detail=e.errors())
@@ -69,7 +70,8 @@ async def add_new_book(user: user_dependency, db: Db_Dependency,image: UploadFil
             rating=book_request.rating,
             published_date=book_request.published_date,
             image_path=file_path,
-            page_count=book_request.page_count
+            page_count=book_request.page_count,
+            admin_opinion = book_request.admin_opinion
         )
 
         # Add a book to database ->
