@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %}Book Details - BookTalks{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', path='/css/book_details.css') }}">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="container vh-auto">
+    <div class="row h-50 mt-5">
+
+        <div class="col-md-5 d-flex justify-content-center align-items-center p-5">
+            <img class="rounded" src="/uploaded_images/books/0b752a5f-c4f7-41b7-86e8-bfe91e2d824e.jpg" >
+        </div>
+
+        <div class="col-md-7 d-flex flex-column text-white p-5">
+            <div>
+                <!-- Title -->
+                <h1 class="h2 text-white">Binboğalar Efsanesi</h1>
+                <!-- Rating -->
+                <div class="rating mb-3">
+                    <span class="bi bi-star-fill text-warning"></span>
+                    <span class="bi bi-star-fill text-warning"></span>
+                    <span class="bi bi-star-fill text-warning"></span>
+                    <span class="bi bi-star-fill text-warning"></span>
+                    <span class="bi bi-star-fill"></span>
+                </div>
+                <!-- Description -->
+                <small class="text-white">Yüzyıllarca yerleşik düzene geçmemek için direnen Türkmenler’in romanı Binboğalar Efsanesi Hıdrellez şenliklerinde, göçerlerin kış için sığınacak topraklar bulma dilekleriyle başlar. Ancak, kış onlar için bir yok oluş öyküsüne dönüşecektir.</small>
+
+                <div class="d-flex align-items-center justify-content-between mt-5">
+                    <!-- Published Date -->
+                    <h5 class="d-flex align-items-center h5">
+                        <i class="bi bi-calendar me-2"></i>
+                        Yayın yılı: 1995
+                    </h5>
+                    <!-- Page Count -->
+                    <h5 class="d-flex align-items-center h5">
+                        <i class="bi bi-book me-2"></i>
+                        Sayfa sayısı: 368
+                    </h5>
+                </div>
+                <!-- Divider -->
+                <hr>
+
+                <!-- Admin note -->
+                <div class="d-flex flex-column h-50">
+                    <h5 class="d-flex align-items-center h5 mb-2 orange-label">
+                        <img width="40px" height="40px" class="img-fluid me-2" src="{{ url_for('static', path='/icons/administrator.png') }}">
+                        Admin Görüşü:
+                    </h5>
+                    <small>Binboğalar Efsanesi, Yaşar Kemal’in doğa ve insan ilişkisinin iç içe geçtiği, Anadolu’nun zorlu yaşamını etkileyici bir dille anlattığı güçlü bir romandır. Yörük kültürü, toplumsal adaletsizlik ve direniş temalarıyla dikkat çeker.</small>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div style="margin: 100px;" class="d-flex flex-column">
+        <div class="card book-details-author-card text-white m-3" >
+              <div class="row g-0">
+                <div class="col-md-3">
+                  <img src="/uploaded_images/authors/4be2b644-18b9-40b6-8e00-5b66f96d30a5.jpg" class="img-fluid rounded book-details-author-img" alt="...">
+                </div>
+                <div class="col-md-9">
+                  <div class="card-body py-5">
+                    <h5 class="card-title orange-label">Yazar hakkında</h5>
+                    <p class="card-text mx-auto">Yaşar Kemal, Türk edebiyatının en güçlü kalemlerinden biridir. Anadolu insanının yaşam mücadelesini, doğayla kurduğu bağı ve toplumsal sorunları epik bir dille anlatmıştır. Özellikle köy hayatını, yoksulluğu ve direnişi gerçekçi betimlemeleriyle öne çıkar. İnce Memed, Binboğalar Efsanesi gibi eserleriyle sadece Türkiye’de değil, dünya çapında da tanınan bir yazar olmuştur.</p>
+                    <button class="btn book-details-author-button" > Yazarın diğer kitaplarını gör</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+    </div>
+
+</div>
+{% endblock %}

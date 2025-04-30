@@ -1,5 +1,5 @@
 from typing import Optional
-from pydantic import BaseModel, Field, EmailStr, field_validator
+from pydantic import BaseModel, Field, EmailStr
 
 class BookRequest(BaseModel):
     id: Optional[int] = Field(description='Id is not needed on create', default=None)
@@ -9,6 +9,7 @@ class BookRequest(BaseModel):
     rating: int = Field(gt=0, lt=6)
     published_date: int = Field(gt=0)
     image_path: Optional[str] = None
+    page_count: int = Field(gt=0)
 
 
 class AuthorRequest(BaseModel):

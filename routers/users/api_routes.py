@@ -3,13 +3,13 @@ from starlette import status
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from db.database import SessionLocal
-from db.models import User
+from repositories import user_repository as repository
 from requests_validation import PasswordUpdateRequest
-from routers.auth import validate_current_user
+from ..auth.auth_service import validate_current_user, verify_password, hash_password
 from passlib.context import CryptContext
 
 
-router = APIRouter(prefix='/user', tags=['User'])
+router = APIRouter(prefix='/api/user', tags=['User API'])
 bcrypt_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 def get_db():
@@ -26,7 +26,9 @@ UserDependency = Annotated[dict, Depends(validate_current_user)]
 async def get_current_user(user: UserDependency, db: Db_Dependency):
     if user is None:
         HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="User is invalid.")
-    current_user = db.query(User).filter(User.id == user.get('user_id')).first()
+
+    current_user = repository.get_user_by_id(db, user.get('user_id'))
+
     if current_user is None:
         HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User is not found.")
     return current_user
@@ -35,7 +37,7 @@ async def get_current_user(user: UserDependency, db: Db_Dependency):
 async def update_password(password_update_request: PasswordUpdateRequest, user: UserDependency, db: Db_Dependency):
     if user is None:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
-    current_user = db.query(User).filter(User.id == user.get('user_id')).first()
+    current_user = repository.get_user_by_id(db, user.get('user_id'))
     if current_user is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User is not found.")
 
@@ -51,7 +53,7 @@ async def update_password(password_update_request: PasswordUpdateRequest, user: 
     if new_password != confirm_password:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Passwords do not match")
 
-    current_user.hashed_password = bcrypt_context.hash(new_password)
+    current_user.hashed_password = hash_password(new_password)
     db.commit()
     db.refresh(current_user)
 
@@ -59,8 +61,7 @@ async def update_password(password_update_request: PasswordUpdateRequest, user: 
 
 
 
-def verify_password(plain_password, hashed_password) -> bool:
-    return bcrypt_context.verify(plain_password, hashed_password)
+
 
 
 

@@ -1,0 +1,41 @@
+:root {
+    --my-black: black;
+    --my-white: #EFEEEA;
+    --my-dark-blue: #273F4F;
+    --my-orange: #FE7743;
+    --my-gray: #17181a;
+}
+
+@font-face {
+    font-family: 'CarterOne';
+    src: url('../fonts/CarterOne-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Apply default font */
+body {
+  background-color: var(--my-black);
+  font-family: 'CarterOne', sans-serif;
+}
+
+h1, h2, h3, h4, h5 {
+    color: var(--my-white);
+}
+
+.light-label-color {
+    color: var(--my-white);
+}
+
+.orange-label{
+    color: var(--my-orange)
+}
+
+.custom-navbar {
+    background: var(--my-black)
+}
+
+
+
+
+

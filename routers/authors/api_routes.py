@@ -8,10 +8,13 @@ from db.models import Author
 from requests_validation import AuthorRequest
 from pydantic import ValidationError
 from helpers import generate_unique_filename
+from repositories import author_repository as repository
 
-router = APIRouter(tags=["Authors"], prefix="/authors")
+router = APIRouter(
+    tags=["Authors API"],
+    prefix="/api/authors")
 
-AUTHORS_DIR = os.path.join('uploaded_images/authors')
+AUTHORS_DIR = os.path.join('uploaded_images', 'authors')
 
 def get_db():
     db = SessionLocal()
@@ -24,7 +27,7 @@ Db_Dependency = Annotated[Session, Depends(get_db)]
 
 @router.get("", status_code=status.HTTP_200_OK)
 async def get_all_authors(db: Db_Dependency):
-    return db.query(Author).all()
+    return repository.get_all_author(db)
 
 @router.post("/add_new_author/", status_code=status.HTTP_201_CREATED)
 async def add_new_author(db: Db_Dependency, name: str = Form(), image: UploadFile = File(...)):
@@ -44,9 +47,8 @@ async def add_new_author(db: Db_Dependency, name: str = Form(), image: UploadFil
 
         new_author = Author(name=author_request.name, image_path=file_path)
 
-        db.add(new_author)
-        db.commit()
-        db.refresh(new_author)
+        # Add author to database ->
+        repository.add_author(db, new_author)
         return {"message": "Author successfully added", "author": new_author}
 
     except OSError as e:  # For file write error

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Home Page - BookTalks{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', path='/css/books.css') }}">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+
+    <div class="row" style="margin-top: 150px;">
+        {% for book in books %}
+        <div class="col-md-3 d-flex my-3">
+            <div class="card shadow-sm book-list-card mx-auto text-white" onclick="window.location.href='/books/book_details/{{ book.id }}'">
+                <img src="{{ book.image_path }}" class="book-list-img" alt="Book Cover">
+                <div class="card-body d-flex flex-column">
+
+                    <div class="rating mb-3">
+                        <!-- Rating -->
+                        {% for i in range(1,6) %}
+                            {% if i < book.rating %}
+                                <span class="bi bi-star-fill text-warning"></span>
+                            {% else %}
+                                <span class="bi bi-star-fill"></span>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <h5 class="card-title">{{ book.title }}</h5>
+                    <p class="card-text">{{ book.description[:100] }}...</p>
+                </div>
+                <div class="card-footer">
+                    <button class="btn book-list-button">Detayları Gör</button>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

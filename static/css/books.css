@@ -1,0 +1,30 @@
+.book-list-img {
+    width: 230px;
+    height: 300px;
+    object-fit: contain;
+    margin-top: -100px;
+}
+
+.book-list-card {
+    width: 230px;
+    background-color: var(--my-gray);
+    margin-bottom: 150px;
+    transform: scale(1);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.book-list-card:hover {
+    transform: scale(1.1);
+}
+
+.book-list-button {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    border-radius: 7px;
+    background-color: var(--my-orange);
+    color: var(--my-white);
+}

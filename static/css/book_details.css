@@ -1,0 +1,32 @@
+hr {
+    border: 5px solid var(--my-white);
+    border-radius: 25px
+}
+
+.book-details-author-img {
+    object-fit: contain;
+}
+
+.book-details-author-card {
+    background-color: var(--my-gray);
+    transform: scale(1);
+    transition: transform 0.3s ease;
+}
+
+.book-details-author-card:hover {
+    transform: scale(1.03);
+}
+
+.book-details-author-button {
+    border-radius: 7px;
+    background-color: var(--my-orange);
+    color: var(--my-white);
+    transition: all 0.3s ease
+}
+
+.book-details-author-button:hover{
+    border-radius: 7px;
+    background-color: var(--my-black);
+    border: solid 1px var(--my-white);
+    color: var(--my-orange);
+}
