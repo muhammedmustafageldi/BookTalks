@@ -1,4 +1,3 @@
-from pydantic import BaseModel
 from db.database import Base
 from sqlalchemy import Column, Integer, String, ForeignKey
 
@@ -17,7 +16,7 @@ class Book(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String, nullable=False)
-    author_id = Column(Integer, ForeignKey('authors.id'), nullable=False)
+    author_id = Column(Integer, ForeignKey('authors.id'), nullable=False, index=True)
     description = Column(String, nullable=False)
     rating = Column(Integer, nullable=False)
     published_date = Column(Integer, nullable=False)

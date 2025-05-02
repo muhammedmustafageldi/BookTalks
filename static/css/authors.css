@@ -1,0 +1,21 @@
+.author-list-img {
+    max-width: 75%;
+    height: 250px;
+    object-fit: cover;
+    margin-top: -100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.author-list-card {
+    width: 230px;
+    background-color: var(--my-gray);
+    margin-bottom: 150px;
+    transform: scale(1);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.author-list-card:hover {
+    transform: scale(1.1);
+}

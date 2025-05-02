@@ -11,10 +11,7 @@ async function loginTransaction(event) {
     const form = event.target
     const formData = new FormData(form)
     
-    const payload = new URLSearchParams()
-    for (const [key, value] of formData.entries()) {
-        payload.append(key,value)
-    }
+    const payload = new URLSearchParams(formData)
 
     try {
         const response = await fetch('/auth/token', {

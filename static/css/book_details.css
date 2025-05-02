@@ -4,6 +4,7 @@ hr {
 }
 
 .book-details-author-img {
+    max-height: 300px;
     object-fit: contain;
 }
 
@@ -29,4 +30,10 @@ hr {
     background-color: var(--my-black);
     border: solid 1px var(--my-white);
     color: var(--my-orange);
+}
+
+.book-details-img {
+    width: 345px;
+    height: 450px;
+    object-fit: contain;
 }

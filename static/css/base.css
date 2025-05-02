@@ -31,6 +31,10 @@ h1, h2, h3, h4, h5 {
     color: var(--my-orange)
 }
 
+.centered-text {
+    text-align: center;
+}
+
 .custom-navbar {
     background: var(--my-black)
 }

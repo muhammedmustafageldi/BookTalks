@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %}Author Details - BookTalks{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', path='/css/author_details.css') }}">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+        <!-- Author details card -->
+        <div class="card author-details-author-card">
+            <div class="row">
+                
+                <div class="col-md-3 text-center d-flex justify-content-center align-items-center">
+                    <img src="{{ url_for('images', path=author.image_path) }}" class="img-fluid rounded-circle author-details-author-img" alt="...">
+                </div>
+
+                <div class="col-md-9 d-flex align-items-center">
+                    <div class="card-body">
+                        <h5 class="card-title display-6 orange-label">{{ author.name }}</h5>
+                        <span class="card-text light-label-color mx-auto"> {{ author.author_info }} </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Books of author -->
+         <div class="container my-5">
+            <h5 class="display-6 orange-label centered-text">Yazarın kitapları</h5>
+            <p class="centered-text text-white">📚 Toplam kitap sayısı: {{ author_books|length }}</p>
+
+            <div class="d-flex justify-content-center mt-5">
+                <input 
+                    class="form-control w-50 text-center" 
+                    type="search" 
+                    placeholder="Yazarın kitaplarında ara..." 
+                    name="query" 
+                    id="search-input"
+                    aria-label="Search">
+            </div>
+
+            <br>
+
+            <div id="book-list">
+
+                {% for book in author_books %}
+
+                <div class="card author-details-book-card" onclick="window.location.href='/books/book_details/{{ book.id }}'">
+                    <div class="row">
+
+                        <div class="col-md-3 text-center d-flex justify-content-center align-items-center">
+                            <img src="{{ url_for('images', path=book.image_path) }}" class="img-fluid rounded author-details-book-img" alt="...">
+                        </div>
+
+                        <div class="col-md-9 d-flex align-items-center">
+                            <div class="card-body">
+                                <h5 class="card-title orange-label">{{ book.title }}</h5>
+                                <span class="card-text light-label-color mx-auto"> {{ book.description }} </span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                {% else %}
+                    <p class="text-white text-center mt-3">Hiç kitap bulunamadı...</p>
+                {% endfor %}
+            </div>
+
+         </div>
+
+
+        
+    
+</div>
+{% endblock %}
+
+{% block script %}
+    <script src="{{ url_for('static', path='/js/author_details.js') }}"></script>
+{% endblock %}

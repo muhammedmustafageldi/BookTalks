@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Authors - BookTalks{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', path='/css/authors.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+      
+    <div class="row" style="margin-top: 150px;">
+
+        {% for author in authors %}
+        <div class="col-md-3 d-flex my-3">
+            <div class="card shadow-sm author-list-card mx-auto text-white" onclick="window.location.href='/authors/author_details/{{ author.id }}'">
+                <img src="{{ url_for('images', path=author.image_path) }}" class="author-list-img rounded-circle" alt="Author Cover">
+                <div class="card-body d-flex flex-column">
+
+                    <h5 class="card-title orange-label centered-text my-3">{{ author.name }}</h5>
+                    <p class="card-text">{{ author.author_info[:100] }}...</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

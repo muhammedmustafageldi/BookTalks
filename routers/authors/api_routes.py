@@ -38,14 +38,20 @@ async def add_new_author(db: Db_Dependency, name: str = Form(), author_info: str
         # Return validation messages if there is erroneous data
         raise HTTPException(status_code=422, detail=e.errors())
 
+    # Example: abc.jpg
     unique_filename = generate_unique_filename(image.filename)
-    file_path = os.path.join(AUTHORS_DIR, unique_filename)
+
+    # Example: uploaded_images/authors/abc.jpeg
+    full_file_path = os.path.join(AUTHORS_DIR, unique_filename)
+
+    # Example: authors/abc.jpeg
+    relative_path = os.path.relpath(full_file_path, "uploaded_images")
 
     try:
-        with open(file_path, "wb") as buffer:
+        with open(full_file_path, "wb") as buffer:
             buffer.write(await image.read())
 
-        new_author = Author(name=author_request.name, image_path=file_path, author_info=author_request.author_info)
+        new_author = Author(name=author_request.name, image_path=relative_path, author_info=author_request.author_info)
 
         # Add author to database ->
         repository.add_author(db, new_author)

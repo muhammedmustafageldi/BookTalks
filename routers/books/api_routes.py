@@ -56,11 +56,18 @@ async def add_new_book(user: user_dependency, db: Db_Dependency,image: UploadFil
     except ValidationError as e:
         raise HTTPException(status_code=422, detail=e.errors())
 
+    # Example: abc.jpg
     unique_filename = generate_unique_filename(image.filename)
-    file_path = os.path.join(BOOKS_DIR, unique_filename)
+
+    # Example: uploaded_images/books/abc.jpeg
+    full_file_path = os.path.join(BOOKS_DIR, unique_filename)
+
+    # Example: books/abc.jpeg
+    relative_path = os.path.relpath(full_file_path, "uploaded_images")
+
 
     try:
-        with open(file_path, "wb") as buffer:
+        with open(full_file_path, "wb") as buffer:
             buffer.write(await image.read())
 
         new_book = Book(
@@ -69,7 +76,7 @@ async def add_new_book(user: user_dependency, db: Db_Dependency,image: UploadFil
             description=book_request.description,
             rating=book_request.rating,
             published_date=book_request.published_date,
-            image_path=file_path,
+            image_path=relative_path,
             page_count=book_request.page_count,
             admin_opinion = book_request.admin_opinion
         )

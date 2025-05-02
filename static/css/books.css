@@ -25,6 +25,10 @@
     transform: translateX(-50%);
     width: 70%;
     border-radius: 7px;
-    background-color: var(--my-orange);
+    background-color: var(--my-dark-blue);
     color: var(--my-white);
+}
+
+.book-list-button:hover{
+    background-color: var(--my-orange);
 }

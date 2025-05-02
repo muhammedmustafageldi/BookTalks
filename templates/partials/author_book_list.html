@@ -1,0 +1,22 @@
+{% for book in author_books %}
+
+<div class="card author-details-book-card" onclick="window.location.href='/books/book_details/{{ book.id }}'">
+    <div class="row">
+
+        <div class="col-md-3 text-center d-flex justify-content-center align-items-center">
+            <img src="{{ url_for('images', path=book.image_path) }}" class="img-fluid rounded author-details-book-img"
+                alt="...">
+        </div>
+
+        <div class="col-md-9 d-flex align-items-center">
+            <div class="card-body">
+                <h5 class="card-title orange-label">{{ book.title }}</h5>
+                <span class="card-text light-label-color mx-auto"> {{ book.description }} </span>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% else %}
+    <p class="text-white text-center m-5">Hiç kitap bulunamadı...</p>
+{% endfor %}

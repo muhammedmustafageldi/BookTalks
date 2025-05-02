@@ -1,0 +1,46 @@
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.author-details-author-card {
+    background-color: var(--my-gray);
+    margin: 15px;
+    border-radius: 16px;
+}
+
+.author-details-author-img {
+    width: 253px;
+    max-height: 80%;
+    object-fit: cover;
+    border: solid 3px var(--my-dark-blue);
+}
+
+.author-details-book-img {
+    width: 200px;
+    max-width: 50%;
+    object-fit: cover;
+    border: solid 3px var(--my-dark-blue);
+    margin-top: -50px;
+}
+
+.author-details-book-card {
+    background-color: var(--my-gray);
+    margin: 15px;
+    border-radius: 16px;
+    margin-top: 70px;
+    border-color: aliceblue;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+.author-details-book-card:hover {
+    transform: scale(1.05);
+}

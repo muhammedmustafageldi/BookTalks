@@ -6,6 +6,7 @@ from fastapi import HTTPException, Depends
 from starlette import status
 from fastapi.security import OAuth2PasswordBearer
 from repositories import auth_repository as repository
+from starlette.responses import RedirectResponse
 
 SECRET_KEY = "AkdFRltXkDDzeV4b1BtUYMbpI5dfyyAtC3GBecIVbCSqiwnN2d7kcGhuNNWtZEdE"
 ALGORITHM = "HS256"
@@ -48,3 +49,9 @@ def verify_password(plain_password, hashed_password) -> bool:
 
 def hash_password(password) -> str:
     return bcrypt_context.hash(password)
+
+# Define redirect
+def redirect_to_login():
+    redirect_response = RedirectResponse(url='/auth/login-page', status_code=status.HTTP_302_FOUND)
+    redirect_response.delete_cookie(key='access_token')
+    return redirect_response
