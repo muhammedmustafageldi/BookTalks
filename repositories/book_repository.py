@@ -17,6 +17,9 @@ def search_books_by_author_and_title(db: Session, author_id: int, query: str):
         Book.title.ilike(f"%{query}%")
     ).all()
 
+def search_books_by_name(db: Session, query: str):
+    return db.query(Book).filter(Book.title.ilike(f"%{query}%")).all()
+
 ### INSERT TRANSACTIONS ->
 def add_book(db: Session, book: Book):
     db.add(book)

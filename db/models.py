@@ -1,3 +1,4 @@
+from sqlalchemy.orm import relationship
 from db.database import Base
 from sqlalchemy import Column, Integer, String, ForeignKey
 
@@ -24,6 +25,8 @@ class Book(Base):
     page_count = Column(Integer, nullable=False)
     admin_opinion = Column(String, nullable=False)
 
+    author = relationship('Author', back_populates='books')
+
 class Author(Base):
     __tablename__ = 'authors'
 
@@ -31,3 +34,5 @@ class Author(Base):
     name = Column(String, nullable=False)
     author_info = Column(String, nullable=False)
     image_path = Column(String, default=None)
+
+    books = relationship('Book', back_populates='author')

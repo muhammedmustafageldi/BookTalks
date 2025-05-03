@@ -50,8 +50,7 @@ async def author_details_render(request: Request, db: Db_Dependency, author_id: 
             return redirect_to_login()
 
         author = repository.get_author_by_id(db, author_id)
-        author_books = book_repository.get_books_by_author_id(db, author.id)
-        return templates.TemplateResponse('author_details.html', {'request': request, 'author': author, 'author_books': author_books,'user':user})
+        return templates.TemplateResponse('author_details.html', {'request': request, 'author': author, 'author_books': author.books,'user':user})
 
     except:
         return redirect_to_login()

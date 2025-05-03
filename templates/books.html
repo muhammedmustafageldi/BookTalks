@@ -18,11 +18,13 @@
             name="query" id="search-input" aria-label="Search">
     </div>
 
-    <div class="row" style="margin-top: 150px;">
+    <div id="book-list-container" class="row" style="margin-top: 150px;">
         {% for book in books %}
         <div class="col-md-3 d-flex my-3">
             <div class="card shadow-sm book-list-card mx-auto text-white" onclick="window.location.href='/books/book_details/{{ book.id }}'">
-                <img src="{{ url_for('images', path=book.image_path) }}" class="book-list-img" alt="Book Cover">
+                <div class="d-flex justify-content-center">
+                    <img src="{{ url_for('images', path=book.image_path) }}" class="book-list-img" alt="Book Cover">
+                </div>
                 <div class="card-body d-flex flex-column">
 
                     <div class="rating mb-3">
@@ -46,4 +48,9 @@
         {% endfor %}
     </div>
 </div>
+{% endblock %}
+
+
+{% block script %}
+    <script src="{{ url_for('static', path='/js/books.js') }}"></script>
 {% endblock %}

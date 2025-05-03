@@ -47,7 +47,19 @@ async def book_details_render(request: Request, db: Db_Dependency, book_id: int 
             return redirect_to_login()
 
         book = book_repository.get_book_by_id(db, book_id)
-        author = author_repository.get_author_by_id(db, book.author_id)
-        return templates.TemplateResponse("book_details.html", {'request': request, 'book': book, 'user': user, 'author': author})
+        return templates.TemplateResponse("book_details.html", {'request': request, 'book': book, 'user': user, 'author': book.author})
+    except:
+        return redirect_to_login()
+
+@router.get("/search")
+async def search_books_by_name(request: Request, db: Db_Dependency, query: str = ""):
+    try:
+        user = await validate_current_user(request.cookies.get('access_token'))
+        if user is None:
+            return redirect_to_login()
+
+        books = book_repository.search_books_by_name(db, query)
+        return templates.TemplateResponse('/partials/book_book_list.html', {'request': request, 'books': books})
+
     except:
         return redirect_to_login()

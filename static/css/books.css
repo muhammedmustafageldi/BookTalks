@@ -1,6 +1,24 @@
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+    70% {
+        transform: scale(0.9);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+
 .book-list-img {
-    width: 230px;
-    height: 300px;
+    max-width: 80%;
+    max-height: 300px;
     object-fit: contain;
     margin-top: -100px;
 }
@@ -9,9 +27,9 @@
     width: 230px;
     background-color: var(--my-gray);
     margin-bottom: 150px;
-    transform: scale(1);
-    transition: transform 0.3s ease;
     cursor: pointer;
+    animation: bounceIn 0.8s ease-out;
+    transition: transform 0.3s ease;
 }
 
 .book-list-card:hover {

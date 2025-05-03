@@ -1,0 +1,30 @@
+{% for book in books %}
+<div class="col-md-3 d-flex my-3">
+    <div class="card shadow-sm book-list-card mx-auto text-white"
+        onclick="window.location.href='/books/book_details/{{ book.id }}'">
+        <div class="d-flex justify-content-center">
+            <img src="{{ url_for('images', path=book.image_path) }}" class="book-list-img" alt="Book Cover">
+        </div>
+        <div class="card-body d-flex flex-column">
+
+            <div class="rating mb-3">
+                <!-- Rating -->
+                {% for i in range(1,6) %}
+                {% if i <= book.rating %} <span class="bi bi-star-fill text-warning"></span>
+                    {% else %}
+                    <span class="bi bi-star-fill"></span>
+                    {% endif %}
+                    {% endfor %}
+            </div>
+            <h5 class="card-title">{{ book.title }}</h5>
+            <p class="card-text">{{ book.description[:100] }}...</p>
+        </div>
+        <div class="card-footer">
+            <button class="btn book-list-button">Detayları Gör</button>
+        </div>
+    </div>
+</div>
+
+{% else %}
+<p class="text-white text-center m-5">Hiç kitap bulunamadı...</p>
+{% endfor %}
