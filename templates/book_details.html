@@ -4,6 +4,7 @@
 
 {% block css %}
 <link rel="stylesheet" href="{{ url_for('static', path='/css/book_details.css') }}">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
@@ -11,7 +12,7 @@
     <div class="row h-50 mt-5">
 
         <div class="col-md-5 d-flex justify-content-center align-items-center p-5">
-            <img class="rounded book-details-img" src="{{ url_for('images', path=book.image_path) }}" >
+            <img class="rounded book-details-img" src="{{ url_for('images', path=book.image_path) }}">
         </div>
 
         <div class="col-md-7 d-flex flex-column text-white p-5">
@@ -21,12 +22,11 @@
                 <!-- Rating -->
                 <div class="rating mb-3">
                     {% for i in range(1,6) %}
-                        {% if i <= book.rating %}
-                            <span class="bi bi-star-fill text-warning"></span>
+                    {% if i <= book.rating %} <span class="bi bi-star-fill text-warning"></span>
                         {% else %}
-                            <span class="bi bi-star-fill"></span>
+                        <span class="bi bi-star-fill"></span>
                         {% endif %}
-                    {% endfor %}
+                        {% endfor %}
                 </div>
                 <!-- Description -->
                 <small class="text-white">{{ book.description }}</small>
@@ -49,7 +49,8 @@
                 <!-- Admin note -->
                 <div class="d-flex flex-column h-50">
                     <h5 class="d-flex align-items-center h5 mb-2 orange-label">
-                        <img width="40px" height="40px" class="img-fluid me-2" src="{{ url_for('static', path='/icons/administrator.png') }}">
+                        <img width="40px" height="40px" class="img-fluid me-2"
+                            src="{{ url_for('static', path='/icons/administrator.png') }}">
                         Admin Görüşü:
                     </h5>
                     <small>{{ book.admin_opinion }}</small>
@@ -59,22 +60,66 @@
 
     </div>
 
-    <div style="margin: 100px;" class="d-flex flex-column">
-        <div class="card book-details-author-card text-white m-3" >
-              <div class="row g-0">
+    <div class="d-flex flex-column margin-element my-3">
+        <div class="card book-details-author-card text-white m-3">
+            <div class="row g-0">
                 <div class="col-md-3">
-                  <img src="{{ url_for('images', path=author.image_path) }}" class="img-fluid rounded book-details-author-img" alt="...">
+                    <img src="{{ url_for('images', path=author.image_path) }}"
+                        class="img-fluid rounded book-details-author-img" alt="...">
                 </div>
                 <div class="col-md-9">
-                  <div class="card-body py-5">
-                    <h5 class="card-title orange-label">Yazar hakkında</h5>
-                    <p class="card-text mx-auto">{{ author.author_info }}</p>
-                    <button class="btn book-details-author-button" onclick="window.location.href='/authors/author_details/{{ author.id }}'" > Yazarın diğer kitaplarını gör</button>
-                  </div>
+                    <div class="card-body p-5">
+                        <h5 class="card-title orange-label">Yazar hakkında</h5>
+                        <p class="card-text mx-auto">{{ author.author_info }}</p>
+                        <button class="btn book-details-author-button"
+                            onclick="window.location.href='/authors/author_details/{{ author.id }}'"> Yazarın diğer
+                            kitaplarını gör</button>
+                    </div>
                 </div>
-              </div>
             </div>
+        </div>
     </div>
+
+    <hr class="margin-element">
+
+    <!-- User comments area -->
+
+        <h2 class="text-center my-5">Diğer kullanıcıların yorumları: </h2>
+
+        {% for comment in comments %}
+            <div class="w-75 mx-auto text-white m-3 d-flex flex-column mb-4 p-4">
+                <div class="row g-0">
+                    <div class="col-md-3 d-flex justify-content-center align-items-center">
+                        <img src="{{ url_for('images', path=author.image_path) }}"
+                            class="img-fluid rounded-circle book-details-comment-user-img" alt="...">
+                    </div>
+                    <div class="col-md-9 mt-3">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center" >
+                                <h5 class="card-title orange-label me-2">Muhammed Mustafa Geldi</h5>
+                                <strong class="bisque-label">10 dakika önce</strong>
+                            </div>
+                            <p class="card-text mx-auto">Bazı yerler biraz yavaş ilerlese de genel olarak çok keyif aldım.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+    <!-- Create comment area -->
+
+        <div class="d-flex flex-column w-75 m-3 justify-content-center mx-auto">
+            <!-- Commenting Area -->
+            <div class="card comment-card m-4">
+                <div class="card-body">
+                    <h5 class="card-title light-label-color">Yorum Yapın:</h5>
+                    <form>
+                        <textarea class="form-control" rows="5" placeholder="Yorumunuzu buraya yazın..."></textarea>
+                        <button class="btn btn-dark w-100 mt-3">Yorumu Gönder</button>
+                    </form>
+                </div>
+            </div>
+        </div>
 
 </div>
 {% endblock %}

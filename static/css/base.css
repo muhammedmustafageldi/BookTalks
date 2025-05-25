@@ -28,7 +28,11 @@ h1, h2, h3, h4, h5 {
 }
 
 .orange-label{
-    color: var(--my-orange)
+    color: var(--my-orange);
+}
+
+.bisque-label {
+    color: bisque;
 }
 
 .centered-text {
@@ -36,7 +40,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .custom-navbar {
-    background: var(--my-black)
+    background: var(--my-black);
 }
 
 

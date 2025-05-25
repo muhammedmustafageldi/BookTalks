@@ -37,3 +37,18 @@ hr {
     height: 450px;
     object-fit: contain;
 }
+
+.comment-card {
+    background-color: var(--my-black);
+}
+
+.margin-element {
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.book-details-comment-user-img {
+    max-height: 120px;
+    object-fit: contain;
+    border: 2px solid white;
+}
