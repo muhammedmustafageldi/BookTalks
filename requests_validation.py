@@ -33,3 +33,9 @@ class PasswordUpdateRequest(BaseModel):
     old_password: str = Field(..., min_length=6)
     new_password: str = Field(..., min_length=6)
     confirm_new_password: str = Field(..., min_length=6)
+
+class CommentRequest(BaseModel):
+    book_id: int = Field(..., gt=0)
+    parent_id: Optional[int] = Field(None, description="ID of the parent comment if this is a reply. If not, leave it blank.")
+    content: str = Field(..., min_length=1)
+

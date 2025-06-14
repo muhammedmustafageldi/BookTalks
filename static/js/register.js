@@ -36,12 +36,12 @@ async function registerTransaction(event) {
             // Redirect to login page
             window.location.href = '/auth/login-page'
         } else {
-            // Eğer Request validation dan geçmezse buraya giriyor fakat kullanıcı bir şey görmüyor!
+            // TODO -> ************** Eğer Request validation dan geçmezse buraya giriyor fakat kullanıcı bir şey görmüyor!
             console.log("Fail")
         }
 
     } catch (error) {
         console.error('Error: ', error)
-        alert('An error occurred. Please try again.');
+        alert('Bir hata oluştu. Lütfen tekrar deneyin.')
     }
 }

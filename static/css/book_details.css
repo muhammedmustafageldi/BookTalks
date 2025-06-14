@@ -49,6 +49,9 @@ hr {
 
 .book-details-comment-user-img {
     max-height: 120px;
+    max-width: 120px;
+    min-width: 30px;
+    min-height: 30px;
     object-fit: contain;
     border: 2px solid white;
 }

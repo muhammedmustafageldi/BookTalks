@@ -38,8 +38,7 @@ async def get_all_books(user: user_dependency ,db: Db_Dependency):
 
 @router.post("/add_new_book/", status_code=status.HTTP_201_CREATED)
 async def add_new_book(user: user_dependency, db: Db_Dependency,image: UploadFile = File(...),title: str = Form(...),description: str = Form(...),author_id: int = Form(gt=0),rating: int = Form(...),published_date: int = Form(...), page_count: int = Form(...), admin_opinion: str = Form(...)
-):
-    # Validate user is admin
+):    # Validate user is admin
     if user is None or user.get('role') != 'admin':
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='This request can only be made by admins.')
     # Validate incoming Form fields with Pydantic Model
@@ -64,7 +63,6 @@ async def add_new_book(user: user_dependency, db: Db_Dependency,image: UploadFil
 
     # Example: books/abc.jpeg
     relative_path = os.path.relpath(full_file_path, "uploaded_images")
-
 
     try:
         with open(full_file_path, "wb") as buffer:

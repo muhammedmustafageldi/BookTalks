@@ -12,6 +12,8 @@ from routers.books.api_routes import router as books_api_router
 from routers.books.html_routes import router as books_html_router
 from routers.users.api_routes import router as users_api_router
 from routers.users.html_routes import router as users_html_router
+from routers.comments.api_routes import router as comment_api_router
+from routers.comments.html_routes import router as comment_html_router
 
 app = FastAPI()
 
@@ -41,6 +43,10 @@ app.include_router(books_html_router)
 # Users routes
 app.include_router(users_api_router)
 app.include_router(users_html_router)
+
+# Comment route
+app.include_router(comment_api_router)
+app.include_router(comment_html_router)
 
 app.mount("/uploaded_images", StaticFiles(directory='uploaded_images'), name="images")
 app.mount("/static", StaticFiles(directory='static'), name="static")

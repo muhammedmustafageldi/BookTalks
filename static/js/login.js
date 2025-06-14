@@ -24,7 +24,7 @@ async function loginTransaction(event) {
 
         if (response.ok) {
             const data = await response.json()
-            // Delete any cookies available
+            // Delete any cookies available. From base.js
             logout()
             // Save token to cookie
             document.cookie = `access_token=${data.access_token}; path=/`

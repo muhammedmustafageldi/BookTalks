@@ -70,5 +70,5 @@ async def search_books_by_author(request: Request, db: Db_Dependency, author_id:
             "request": request,
             "author_books": filtered_books
         })
-    except:
-        return HTMLResponse("<p>Bir hata oluştu.</p>", status_code=500)
+    except Exception as e:
+        return HTMLResponse(f"<p>Bir hata oluştu: {e}.</p>", status_code=500)
