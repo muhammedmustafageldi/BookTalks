@@ -1,5 +1,6 @@
 from typing import Optional
 from pydantic import BaseModel, Field, EmailStr
+from datetime import datetime
 
 class BookRequest(BaseModel):
     id: Optional[int] = Field(description='Id is not needed on create', default=None)
@@ -38,4 +39,15 @@ class CommentRequest(BaseModel):
     book_id: int = Field(..., gt=0)
     parent_id: Optional[int] = Field(None, description="ID of the parent comment if this is a reply. If not, leave it blank.")
     content: str = Field(..., min_length=1)
+
+class CommentResponse(BaseModel):
+    id: int
+    user_id: int
+    book_id: int
+    parent_id: int | None
+    content: str
+    created_at: datetime
+
+    class Config:
+        orm_mode = True
 

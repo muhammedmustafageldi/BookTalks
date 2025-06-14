@@ -1,3 +1,14 @@
+@keyframes createCommentAnim {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
 hr {
     border: 5px solid var(--my-white);
     border-radius: 25px
@@ -54,4 +65,8 @@ hr {
     min-height: 30px;
     object-fit: contain;
     border: 2px solid white;
+}
+
+.create-comment-animation {
+    animation: createCommentAnim 1s ease-out;
 }

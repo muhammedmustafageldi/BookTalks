@@ -1,26 +1,28 @@
-<div class="w-75 mx-auto text-white m-3 d-flex flex-column mb-4 p-4" >
+<div id="comment-item" class="w-75 mx-auto text-white m-3 d-flex flex-column justify-content-center mb-4 p-4">
     <div class="row g-0">
         <div class="col-md-3 d-flex justify-content-center align-items-center">
             <img src="https://picsum.photos/id/237/300/300"
                 class="img-fluid rounded-circle book-details-comment-user-img" alt="...">
         </div>
         <div class="col-md-9 mt-3">
-            <div class="card-body">
+            <div class="card-body px-3">
                 <div class="d-flex align-items-center">
                     <h5 class="card-title orange-label me-2 my-2">{{ comment.user.username }}</h5>
                     <strong class="bisque-label">{{ comment.created_at.strftime('%d.%m.%Y %H:%M') }}</strong>
                 </div>
 
                 {% if comment.parent %}
-                    <div class="p-3 mb-3 rounded bisque-label">
-                        <h5>Alıntılanan:</h5> 
-                        <strong>{{ comment.parent.user.username }}</strong>  
-                        <div class="small">"{{ comment.parent.content[:80] }}..."</div>
-                    </div>
+                <div class="p-3 mb-3 rounded bisque-label">
+                    <h5>Alıntılanan:</h5>
+                    <strong>{{ comment.parent.user.username }}</strong>
+                    <div class="small">"{{ comment.parent.content[:80] }}..."</div>
+                </div>
                 {% endif %}
 
                 <p class="card-text mx-auto">{{ comment.content }}</p>
-                <button class="btn book-details-author-button" data-parent-id="{{ comment.id }}">Yanıtla</button>
+
+                <button class="btn book-details-author-button reply-button" data-parent-id="{{ comment.id }}"
+                    data-parent-username="{{ comment.user.username }}">Yanıtla</button>
             </div>
         </div>
     </div>

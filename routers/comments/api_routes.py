@@ -7,6 +7,7 @@ from db.database import SessionLocal
 from db.models import Comments
 from starlette import status
 from repositories import comment_repository as repository
+from requests_validation import CommentResponse
 
 router = APIRouter(
     prefix="/api/comments",
@@ -37,11 +38,12 @@ async def get_comments_by_book_id(user: user_dependency, db: Db_Dependency, book
     return comments
 
 
-@router.post("/add", status_code=status.HTTP_201_CREATED)
+@router.post("/add", status_code=status.HTTP_201_CREATED, response_model=CommentResponse)
 async def add_comment(user: user_dependency, db: Db_Dependency, comment_request: CommentRequest):
     if user is None:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
 
+    # Create an object
     new_comment = Comments(
         user_id=user['user_id'],
         book_id=comment_request.book_id,
@@ -50,6 +52,6 @@ async def add_comment(user: user_dependency, db: Db_Dependency, comment_request:
     )
     try:
         repository.add_comment(db, new_comment)
-        return {"message": "Yorum başarıyla eklendi", "comment": new_comment}
+        return new_comment
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Bir hata oluştu: {str(e)}")

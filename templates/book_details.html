@@ -86,11 +86,12 @@
 
     <h2 class="text-center my-5">Diğer kullanıcıların yorumları: </h2>
 
-    {% for comment in comments %}
-        {% set depth = 0 %}
-        {% include 'partials/comment_partial.html' %}
-    {% endfor %}
-
+    <div id="comments-container" class="row">
+        {% for comment in comments %}
+            {% include 'partials/comment_partial.html' %}
+        {% endfor %}
+    </div>
+    
 
 
     <!-- Create comment area -->
@@ -100,11 +101,21 @@
         <div class="card comment-card m-4">
             <div class="card-body">
                 <h5 class="card-title light-label-color">Yorum Yapın:</h5>
+                
+                <!-- Dinamic reply info -->
+                <div id="replyInfo" class="alert alert-warning d-flex align-items-center justify-content-between d-none">
+                    <span id="replyingTo"></span>
+                    <button type="button" class="btn-close btn-sm ms-auto" id="cancelReply" aria-label="Close"></button>
+                </div>
+
                 <form id="leave-a-comment-form">
+                    <input type="hidden" id="parentIdInput" name="parent_id" value="">
+
                     <textarea class="form-control" rows="5" name="comment" id="commentText"
                         placeholder="Yorumunuzu buraya yazın..."></textarea>
                     <button type="submit" class="btn btn-dark w-100 mt-3">Yorumu Gönder</button>
                 </form>
+
             </div>
         </div>
     </div>
