@@ -86,13 +86,22 @@
 
     <h2 class="text-center my-5">Diğer kullanıcıların yorumları: </h2>
 
+    <!-- If the list is empty -->
+    {% if comments|length == 0 %}
+    <div class="d-flex justify-content-center">
+        <div class="no-comment-container row">
+            <img src="{{ url_for('static', path='/icons/no-comments.png') }}" alt="empty" class="no-comment-img">
+            <p class="no-comment-text">Bu kitap için henüz yorum yapılmamış. İlk yorum yapan siz olun.</p>
+        </div>
+    </div>
+    {% endif %}
+
+
     <div id="comments-container" class="row">
         {% for comment in comments %}
-            {% include 'partials/comment_partial.html' %}
+        {% include 'partials/comment_partial.html' %}
         {% endfor %}
     </div>
-    
-
 
     <!-- Create comment area -->
 
@@ -101,9 +110,10 @@
         <div class="card comment-card m-4">
             <div class="card-body">
                 <h5 class="card-title light-label-color">Yorum Yapın:</h5>
-                
+
                 <!-- Dinamic reply info -->
-                <div id="replyInfo" class="alert alert-warning d-flex align-items-center justify-content-between d-none">
+                <div id="replyInfo"
+                    class="alert alert-warning d-flex align-items-center justify-content-between d-none">
                     <span id="replyingTo"></span>
                     <button type="button" class="btn-close btn-sm ms-auto" id="cancelReply" aria-label="Close"></button>
                 </div>
@@ -121,6 +131,27 @@
     </div>
 
 </div>
+
+<!-- Delete comment dialog -->
+<div class="modal fade" id="deleteConfirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Yorumu Sil</h5>
+        <button type="button" class="btn-close" style="background-color: antiquewhite;" data-bs-dismiss="modal" aria-label="Close">
+        </button>
+      </div>
+      <div class="modal-body">
+        Bu yorumu silmek istediğinize emin misiniz?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
+        <button type="button" class="btn btn-danger" id="confirmDeleteButton">Sil</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 {% endblock %}
 
 {% block script %}

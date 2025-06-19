@@ -6,6 +6,7 @@ from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
 from starlette import status
 from repositories import comment_repository as repository
+from ..auth.auth_service import validate_current_user, redirect_to_login
 
 router = APIRouter(
     prefix="/comments",
@@ -30,10 +31,14 @@ templates = Jinja2Templates(directory="templates")
 @router.get("/render_single_comment/", response_class=HTMLResponse, status_code=status.HTTP_200_OK)
 async def render_single_comment(request: Request, db: Db_Dependency, comment_id: int = Query(gt=0)):
     try:
+        user = await validate_current_user(request.cookies.get('access_token'))
+        if user is None:
+            return redirect_to_login()
+
         comment = repository.get_single_comment_by_id(db, comment_id)
         if comment is None:
             raise HTTPException(status_code=404, detail="Comment is not found.")
-        return templates.TemplateResponse('/partials/comment_partial.html', {'request': request, 'comment': comment})
+        return templates.TemplateResponse('/partials/comment_partial.html', {'request': request, 'comment': comment, 'user': user})
     except Exception as e:
         print(f"Error: {e}")
         # An error occurred return state

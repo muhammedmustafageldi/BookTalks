@@ -47,7 +47,10 @@ async def book_details_render(request: Request, db: Db_Dependency, book_id: int 
             return redirect_to_login()
 
         book = book_repository.get_book_by_id(db, book_id)
-        return templates.TemplateResponse("book_details.html", {'request': request, 'book': book, 'user': user, 'author': book.author, 'comments': book.comments})
+
+        sorted_comments = sorted(book.comments, key=lambda c: c.created_at)
+
+        return templates.TemplateResponse("book_details.html", {'request': request, 'book': book, 'user': user, 'author': book.author, 'comments': sorted_comments})
     except Exception as e:
         print(f"Error: ${e}")
         return redirect_to_login()

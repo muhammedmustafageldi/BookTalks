@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, Path
+from fastapi import APIRouter, Depends, HTTPException, Path, Query
 from typing import Annotated
 from sqlalchemy.orm import Session
 from requests_validation import CommentRequest
@@ -55,3 +55,18 @@ async def add_comment(user: user_dependency, db: Db_Dependency, comment_request:
         return new_comment
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Bir hata oluştu: {str(e)}")
+
+@router.delete("/delete/", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_comment(user: user_dependency, db: Db_Dependency, comment_id: int = Query(gt=0)):
+    if user is None:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
+
+    comment = repository.get_single_comment_by_id(db, comment_id)
+
+    if comment is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='Comment is not found.')
+
+    if comment.user.id != user.get('user_id'):
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="You are not authorized to delete this comment.")
+
+    repository.delete_comment(db, comment)

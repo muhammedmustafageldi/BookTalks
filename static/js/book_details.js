@@ -11,6 +11,7 @@ addEventListener("DOMContentLoaded", () => {
         commentForm.addEventListener('submit', leaveAcomment)
     }
     setupReplyListener()
+    setupDeleteListeners()
 })
 
 
@@ -31,6 +32,7 @@ async function leaveAcomment(event) {
     if (!token) {
         // Token not found. Redirect to login screen
         logout()
+        return
     } else {
 
         // Get parent_id value
@@ -70,7 +72,7 @@ async function leaveAcomment(event) {
                 if (partialResponse.ok) {
                     const responseHtml = await partialResponse.text()
                     const commentsContainer = document.getElementById("comments-container")
-                    
+
                     // Show create comment anim
                     const tempDiv = document.createElement('div')
                     // Put new comment to html
@@ -78,10 +80,23 @@ async function leaveAcomment(event) {
                     const newComment = tempDiv.querySelector('#comment-item')
 
                     if (newComment) {
+                        // Add default properties
+                        newComment.style.opacity = '0'
+                        newComment.style.transform = 'scale(0)'
+
                         commentsContainer.appendChild(newComment)
-                        newComment.classList.add('create-comment-animation')
+
+                        setTimeout(() => {
+                            newComment.classList.add('create-comment-animation')
+                        }, 50)  
                     }
-                    
+
+                    // "no-comment-container" hide if there is
+                    const noCommentBox = document.querySelector('.no-comment-container')
+                    if (noCommentBox) {
+                        noCommentBox.style.display = 'none'
+                    }
+
                 } else {
                     // An error occurred. Refresh the page
                     location.reload()
@@ -96,9 +111,6 @@ async function leaveAcomment(event) {
             alert('Bir hata oluştu. Lütfen tekrar deneyin.')
         }
     }
-
-
-
 }
 
 function setupReplyListener() {
@@ -138,4 +150,59 @@ function setupReplyListener() {
         replyInfoText.innerText = ''
         replyInfoBox.classList.add('d-none')
     })
+}
+
+function setupDeleteListeners() {
+    const commentsContainer = document.getElementById('comments-container')
+
+    commentsContainer.addEventListener('click', async function (event) {
+        const target = event.target
+
+        const deleteButton = target.closest('.delete-comment-btn')
+        if (deleteButton) {
+            const comment_id = deleteButton.getAttribute('data-comment-id')
+
+            const deleteModal = document.getElementById('deleteConfirmModal')
+            const bootstrapModal = new bootstrap.Modal(deleteModal)
+            bootstrapModal.show()
+
+            document.getElementById('confirmDeleteButton').onclick = async function () {
+
+                // Get and check token 
+                const token = getCookie('access_token')
+                if (!token) {
+                    logout()
+                    return
+                } else {
+                    try {
+                        // Call api
+                        const response = await fetch(`/api/comments/delete/?comment_id=${comment_id}`, {
+                            method: 'DELETE',
+                            headers: {
+                                'Authorization': `Bearer ${token}`
+                            }
+                        })
+                        if (response) {
+                            // Remove deleted item
+                            const commentItem = deleteButton.closest('.comment-item')
+                            if (commentItem) {
+                                commentItem.classList.add('remove-comment-anim')
+                                commentItem.addEventListener('animationend', () => {
+                                    commentItem.remove()
+                                })
+                            }
+                            bootstrapModal.hide()
+                        } else {
+                            alert('Silme işlemi başarısız oldu.')
+                        }
+
+                    } catch (error) {
+                        console.error('Error: ', error)
+                        alert('Bir hata oluştu. Lütfen tekrar deneyin.')
+                    }
+                }
+            }
+        }
+    })
+
 }
