@@ -8,13 +8,13 @@
         </div>
 
         <div class="flex-shrink-0 dropdown ms-auto">
-          <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://github.com/mdo.png" alt="mdo" width="45" height="45" class="rounded-circle">
+          <a href="#" class="d-block link-dark te'xt-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="{{ url_for('images', path=user.image_path) }}" alt="mdo" width="45" height="45" class="rounded-circle">
           </a>
           <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(-110px, 34px, 0px);" data-popper-placement="bottom-end">
             <li><a class="dropdown-item" href="#">Profil</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" onclick="logout()">Çıkış yap</a></li>
+            <li><a class="dropdown-item" href="#" onclick="logout()">Çıkış yap</a></li>
           </ul>
         </div>
 
@@ -32,9 +32,6 @@
 
         <div class="collapse navbar-collapse" id="bottomNavbar">
             <ul class="navbar-nav mx-auto text-center">
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="/">Ana sayfa</a>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link text-white" href="/books">Kitaplar</a>
                 </li>

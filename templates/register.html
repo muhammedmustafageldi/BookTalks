@@ -2,6 +2,11 @@
 
 {% block title %} Register - BookTalks {% endblock %}
 
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', path='/css/register.css') }}">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+{% endblock %}
+
 {% block content %}
 <div class="container-fluid vh-100">
     <div class="row h-100">
@@ -9,40 +14,71 @@
         <!-- Left side -->
         <div class="col-md-7 d-flex justify-content-center align-items-center py-5">
             <div class="w-75">
-                <h2>Kayıt ol</h2>
-                <p style="color: var(--my-dark-blue);">Zaten bir hesabın var mı? <a style="color: var(--my-orange);" href="/auth/login-page">Giriş yap</a></p>
-                <form id="register-form">
+                <form id="register-form" enctype="multipart/form-data" method="POST">
+
+                    <!-- Profile Image Input -->
+                    <div class="mb-4 text-center">
+                        <label for="profileImageInput" class="d-block mb-2 light-label-color">Profil Fotoğrafı</label>
+
+                        <!-- Profile image preview -->
+                        <div class="position-relative d-inline-block">
+                            <img id="profileImagePreview" src="{{ url_for('images', path='/users/default_user_img.png') }}" class="rounded-circle border profile-img-preview">
+
+                            <!-- Camera icon -->
+                            <label for="profileImageInput"
+                                class="position-absolute bottom-0 end-0 bg-dark rounded-circle p-2" style="cursor: pointer;">
+                                <i class="bi bi-camera-fill text-white"></i>
+                            </label>
+                        </div>
+
+                        <!-- Hidden file input -->
+                        <input id="profileImageInput" type="file" accept="image/*" name="profile_image" class="d-none">
+                    </div>
+
                     <div class="mb-3">
                         <label for="email" class="form-label light-label-color">Mail adresiniz</label>
                         <input type="email" class="form-control" name="email" id="email" autocomplete="email" required>
                     </div>
+
                     <div class="mb-3">
                         <label for="username" class="form-label light-label-color">Kullanıcı adı</label>
-                        <input type="text" class="form-control" name="username" id="username" autocomplete="username" required>
+                        <input type="text" class="form-control" name="username" id="username" autocomplete="username"
+                            required>
                     </div>
+
                     <div class="mb-3">
                         <label for="password" class="form-label light-label-color">Şifre</label>
-                        <input type="password" class="form-control" name="password" id="password" autocomplete="new-password" required>
+                        <input type="password" class="form-control" name="password" id="password"
+                            autocomplete="new-password" required>
                     </div>
+
                     <div class="mb-3">
                         <label for="verify-password" class="form-label light-label-color">Şifreyi doğrula</label>
-                        <input type="password" class="form-control" name="verify-password" id="verify-password" autocomplete="new-password" required>
+                        <input type="password" class="form-control" id="verify-password"
+                            autocomplete="new-password" required>
                         <div id="passwordHelpBlock" class="form-text text-white">
-                            Parolanız 6 karakter uzunluğunda olmalıdır. Harf, rakam ve özel karakterlerin kullanılması tavsiye edilir.
+                            Parolanız 6 karakter uzunluğunda olmalıdır. Harf, rakam ve özel karakterlerin kullanılması
+                            tavsiye edilir.
                         </div>
                     </div>
+
+                    <p style="color: var(--my-dark-blue);">Zaten bir hesabın var mı? <a style="color: var(--my-orange);"
+                        href="/auth/login-page">Giriş yap</a></p>
+
                     <button type="submit" class="btn btn-dark w-100" id="registerButton">Kayıt ol</button>
                 </form>
-            
+
             </div>
-            </div>
+        </div>
 
         <!-- Right side -->
-        <div class="col-md-5 d-flex justify-content-center align-items-center text-white py-5" style="background: linear-gradient(to right, var(--my-black), var(--my-dark-blue));">
+        <div class="col-md-5 d-flex justify-content-center align-items-center text-white py-5"
+            style="background: linear-gradient(to right, var(--my-black), var(--my-dark-blue));">
             <div class="my-auto">
                 <h1 class="display-5 px-5">BookTalks 📚 - Kayıt ol</h1>
                 <p class="lead px-5">Kitapların Ötesinde: Fikirler Buluşuyor</p>
-                <p class="px-5 mt-3">Tutkulu okuyuculardan oluşan topluluğumuza katılın ve en sevdiğiniz kitaplar hakkında anlamlı sohbetler başlatın. Şimdi kaydolun ve sesinizi duyurun!</p>
+                <p class="px-5 mt-3">Tutkulu okuyuculardan oluşan topluluğumuza katılın ve en sevdiğiniz kitaplar
+                    hakkında anlamlı sohbetler başlatın. Şimdi kaydolun ve sesinizi duyurun!</p>
             </div>
         </div>
 
@@ -54,5 +90,5 @@
 
 
 {% block script %}
-    <script src="{{ url_for('static', path='/js/register.js') }}"></script>
+<script src="{{ url_for('static', path='/js/register.js') }}"></script>
 {% endblock %}

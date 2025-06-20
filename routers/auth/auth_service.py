@@ -22,8 +22,8 @@ def authenticate_user(username: str, password: str, db):
     return user
 
 
-def create_access_token(username: str, user_id: int, role: str, expires_delta: timedelta):
-    payload = { 'sub': username, 'id': user_id, 'role': role }
+def create_access_token(username: str, user_id: int, role: str, image_path: str,expires_delta: timedelta):
+    payload = { 'sub': username, 'id': user_id, 'role': role, 'image_path': image_path }
     expires = datetime.now(timezone.utc) + expires_delta
     payload.update({'exp': expires})
     return jwt.encode(payload, SECRET_KEY, algorithm=ALGORITHM)
@@ -35,11 +35,11 @@ async def validate_current_user(token: Annotated[str, Depends(oauth2_bearer)]):
         username = payload.get("sub")
         user_id = payload.get("id")
         role = payload.get("role")
+        image_path = payload.get("image_path")
 
         if username is None or user_id is None:
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Username or id is invalid.")
-        return {'username': username, 'user_id': user_id, 'role': role}
-
+        return {'username': username, 'user_id': user_id, 'role': role, 'image_path': image_path }
     except JWTError:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Token is invalid.")
 

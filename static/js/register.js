@@ -1,7 +1,29 @@
 // Register.js
-const registerForm = document.getElementById("register-form")
-if (registerForm) {
-    registerForm.addEventListener('submit', registerTransaction)
+addEventListener('DOMContentLoaded', () => {
+    const registerForm = document.getElementById("register-form")
+    if (registerForm) {
+        registerForm.addEventListener('submit', registerTransaction)
+    }
+
+    setupImgPreview()
+})
+
+function setupImgPreview() {
+    const imageInput = document.getElementById('profileImageInput')
+    const imagePreview = document.getElementById('profileImagePreview')
+
+    if (imageInput && imagePreview) {
+        imageInput.addEventListener('change', function(event) {
+            const file = event.target.files[0]
+            if (file) {
+                const reader = new FileReader()
+                reader.onload = function(e) {
+                    imagePreview.src = e.target.result
+                }
+                reader.readAsDataURL(file)
+            }
+        })
+    }
 }
 
 async function registerTransaction(event) {
@@ -9,26 +31,19 @@ async function registerTransaction(event) {
     
     const form = event.target
     const formData = new FormData(form)
-    const data = Object.fromEntries(formData.entries())
 
-    if (data.password !== data["verify-password"]) {
-        alert("Passwords do not match")
+    const password = formData.get("password")
+    const verifyPassword = document.getElementById('verify-password').value
+
+    if (password !== verifyPassword) {
+        alert("Parolalar eşleşmiyor.")
         return
-    }
-
-    const payload = {
-        email: data.email,
-        username: data.username,
-        password: data.password
     }
 
     try {
         const response = await fetch('/auth/create_user', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(payload)
+            body: formData
         })
 
         if (response.ok) {
@@ -36,8 +51,8 @@ async function registerTransaction(event) {
             // Redirect to login page
             window.location.href = '/auth/login-page'
         } else {
-            // TODO -> ************** Eğer Request validation dan geçmezse buraya giriyor fakat kullanıcı bir şey görmüyor!
             console.log("Fail")
+            alert("Geçersiz form verileri. Lütfen kontrol edip tekrar deneyin.")
         }
 
     } catch (error) {

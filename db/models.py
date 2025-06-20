@@ -12,6 +12,7 @@ class User(Base):
     username = Column(String, nullable=False, unique=True)
     hashed_password = Column(String, nullable=False)
     role = Column(String, default="user")
+    image_path = Column(String, default="users/default_user_img.png")
 
     comments = relationship('Comments', back_populates='user')
 

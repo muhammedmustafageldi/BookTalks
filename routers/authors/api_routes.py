@@ -30,7 +30,10 @@ async def get_all_authors(db: Db_Dependency):
     return repository.get_all_author(db)
 
 @router.post("/add_new_author/", status_code=status.HTTP_201_CREATED)
-async def add_new_author(db: Db_Dependency, name: str = Form(), author_info: str = Form(...) ,image: UploadFile = File(...)):
+async def add_new_author(db: Db_Dependency,
+                         name: str = Form(),
+                         author_info: str = Form(...),
+                         image: UploadFile = File(...)):
     # Validate incoming Form fields with Pydantic Model
     try:
         author_request = AuthorRequest(name=name, author_info=author_info)

@@ -110,3 +110,17 @@ hr {
     background-color: var(--my-gray);
     color: var(--my-orange);
 }
+
+.gradient-border {
+    border: 3px solid transparent;
+    border-radius: 12px;
+    background:
+        linear-gradient(#000, #000) padding-box,
+        linear-gradient(45deg, #ff6b6b, #fbc531) border-box;
+}
+
+.default-border {
+    border: 3px solid var(--my-white);
+    border-radius: 12px;
+}
+

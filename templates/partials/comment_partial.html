@@ -1,13 +1,18 @@
-<div id="comment-item" class="w-75 mx-auto text-white m-3 d-flex flex-column justify-content-center mb-4 p-4 comment-item">
+<div id="comment-item" class="{{ 'gradient-border' if comment.user.role == 'admin' else 'default-border' }} w-75 mx-auto text-white m-3 d-flex flex-column justify-content-center mb-4 p-4 comment-item">
     <div class="row g-0">
         <div class="col-md-3 d-flex justify-content-center align-items-center">
-            <img src="https://picsum.photos/id/237/300/300"
+            <img src="{{ url_for('images', path=comment.user.image_path) }}"
                 class="img-fluid rounded-circle book-details-comment-user-img" alt="...">
         </div>
-        <div class="col-md-9 mt-3">
+        <div class="col-md-9">
             <div class="card-body px-3">
                 <div class="d-flex align-items-center">
-                    <h5 class="card-title orange-label me-2 my-2">{{ comment.user.username }}</h5>
+                    <h5 class="card-title orange-label me-2 my-2">
+                        {{ comment.user.username }} 
+                        {% if comment.user.role == 'admin' %}
+                            (Admin)
+                        {% endif %}
+                    </h5>
                     <strong class="bisque-label">{{ comment.created_at.strftime('%d.%m.%Y %H:%M') }}</strong>
                     <!-- Does this comment belong to the logged in user -->
                     {% if user.user_id == comment.user.id %}

@@ -20,10 +20,10 @@ class AuthorRequest(BaseModel):
     author_info: str = Field(min_length=1, max_length=450)
 
 
-class AuthRequest(BaseModel):
-    email: EmailStr = Field(min_length=10)
-    username: str = Field(min_length=5)
-    password: str = Field(min_length=6)
+class RegisterRequest(BaseModel):
+    email: EmailStr = Field(...)
+    username: str = Field(..., min_length=5)
+    password: str = Field(..., min_length=6)
 
 
 class Token(BaseModel):
