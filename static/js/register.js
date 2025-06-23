@@ -51,8 +51,9 @@ async function registerTransaction(event) {
             // Redirect to login page
             window.location.href = '/auth/login-page'
         } else {
-            console.log("Fail")
-            alert("Geçersiz form verileri. Lütfen kontrol edip tekrar deneyin.")
+            const errorText = await response.text()
+            alert(`Hata: ${errorText}`)
+            console.log(`Error: ${errorText}`)
         }
 
     } catch (error) {

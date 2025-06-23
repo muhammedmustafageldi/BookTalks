@@ -43,7 +43,7 @@ async def update_password(password_update_request: PasswordUpdateRequest, user: 
 
     # is the user password correct
     old_password = password_update_request.old_password
-    if verify_password(old_password, current_user.hashed_password) is not True:
+    if verify_password(old_password, current_user.hashed_password):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Incorrect old password")
 
     # do the new passwords match?
