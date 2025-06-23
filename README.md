@@ -26,10 +26,10 @@ BookTalks is a comprehensive book management system that allows users to browse 
 ### 🔐 Authentication System
 
 <p align="center">
-  <img src="https://github.com/muhammedmustafageldi/My-Github-Files/blob/main/Screnshots/BookTalks/2.png" alt="Register Page" width="80%" style="max-width: 800px; margin-bottom: 20px;"/>
+  <img src="https://github.com/muhammedmustafageldi/My-Github-Files/blob/main/Screnshots/BookTalks/2.png" alt="Register Page" width="95%" style="margin-bottom: 20px;"/>
 </p>
 <p align="center">
-  <img src="https://github.com/muhammedmustafageldi/My-Github-Files/blob/main/Screnshots/BookTalks/1.png" alt="Login Page" width="80%" style="max-width: 800px;"/>
+  <img src="https://github.com/muhammedmustafageldi/My-Github-Files/blob/main/Screnshots/BookTalks/1.png" alt="Login Page" width="95%"/>
 </p>
 
 ---
@@ -37,10 +37,10 @@ BookTalks is a comprehensive book management system that allows users to browse 
 ### 📖 Book Browsing
 
 <p align="center">
-  <img src="https://github.com/muhammedmustafageldi/My-Github-Files/blob/main/Screnshots/BookTalks/3.png" alt="Main Books Page" width="80%" style="max-width: 800px; margin-bottom: 20px;"/>
+  <img src="https://github.com/muhammedmustafageldi/My-Github-Files/blob/main/Screnshots/BookTalks/3.png" alt="Main Books Page" width="95%" style="margin-bottom: 20px;"/>
 </p>
 <p align="center">
-  <img src="https://github.com/muhammedmustafageldi/My-Github-Files/blob/main/Screnshots/BookTalks/4.png" alt="Book Details" width="80%" style="max-width: 800px;"/>
+  <img src="https://github.com/muhammedmustafageldi/My-Github-Files/blob/main/Screnshots/BookTalks/4.png" alt="Book Details" width="95%"/>
 </p>
 
 ---
@@ -48,10 +48,10 @@ BookTalks is a comprehensive book management system that allows users to browse 
 ### 💬 Comments System
 
 <p align="center">
-  <img src="https://github.com/muhammedmustafageldi/My-Github-Files/blob/main/Screnshots/BookTalks/5.png" alt="Book Comments 1" width="80%" style="max-width: 800px; margin-bottom: 20px;"/>
+  <img src="https://github.com/muhammedmustafageldi/My-Github-Files/blob/main/Screnshots/BookTalks/5.png" alt="Book Comments 1" width="95%" style="margin-bottom: 20px;"/>
 </p>
 <p align="center">
-  <img src="https://github.com/muhammedmustafageldi/My-Github-Files/blob/main/Screnshots/BookTalks/6.png" alt="Book Comments 2" width="80%" style="max-width: 800px;"/>
+  <img src="https://github.com/muhammedmustafageldi/My-Github-Files/blob/main/Screnshots/BookTalks/6.png" alt="Book Comments 2" width="95%"/>
 </p>
 
 ---
@@ -59,10 +59,10 @@ BookTalks is a comprehensive book management system that allows users to browse 
 ### ✍️ Authors
 
 <p align="center">
-  <img src="https://github.com/muhammedmustafageldi/My-Github-Files/blob/main/Screnshots/BookTalks/7.png" alt="Authors List" width="80%" style="max-width: 800px; margin-bottom: 20px;"/>
+  <img src="https://github.com/muhammedmustafageldi/My-Github-Files/blob/main/Screnshots/BookTalks/7.png" alt="Authors List" width="95%" style="margin-bottom: 20px;"/>
 </p>
 <p align="center">
-  <img src="https://github.com/muhammedmustafageldi/My-Github-Files/blob/main/Screnshots/BookTalks/8.png" alt="Author Details" width="80%" style="max-width: 800px;"/>
+  <img src="https://github.com/muhammedmustafageldi/My-Github-Files/blob/main/Screnshots/BookTalks/8.png" alt="Author Details" width="95%"/>
 </p>
 
 ---
@@ -70,7 +70,7 @@ BookTalks is a comprehensive book management system that allows users to browse 
 ### 👤 User Profile
 
 <p align="center">
-  <img src="https://github.com/muhammedmustafageldi/My-Github-Files/blob/main/Screnshots/BookTalks/10.png" alt="User Profile Page" width="80%" style="max-width: 800px;"/>
+  <img src="https://github.com/muhammedmustafageldi/My-Github-Files/blob/main/Screnshots/BookTalks/10.png" alt="User Profile Page" width="95%"/>
 </p>
 
 ---
@@ -78,13 +78,13 @@ BookTalks is a comprehensive book management system that allows users to browse 
 ### 🔍 API Documentation
 
 <p align="center">
-  <img src="https://github.com/muhammedmustafageldi/My-Github-Files/blob/main/Screnshots/BookTalks/11.png" alt="Swagger UI 1" width="80%" style="max-width: 800px; margin-bottom: 20px;"/>
+  <img src="https://github.com/muhammedmustafageldi/My-Github-Files/blob/main/Screnshots/BookTalks/11.png" alt="Swagger UI 1" width="95%" style="margin-bottom: 20px;"/>
 </p>
 <p align="center">
-  <img src="https://github.com/muhammedmustafageldi/My-Github-Files/blob/main/Screnshots/BookTalks/12.png" alt="Swagger UI 2" width="80%" style="max-width: 800px; margin-bottom: 20px;"/>
+  <img src="https://github.com/muhammedmustafageldi/My-Github-Files/blob/main/Screnshots/BookTalks/12.png" alt="Swagger UI 2" width="95%" style="margin-bottom: 20px;"/>
 </p>
 <p align="center">
-  <img src="https://github.com/muhammedmustafageldi/My-Github-Files/blob/main/Screnshots/BookTalks/13.png" alt="Swagger UI 3" width="80%" style="max-width: 800px;"/>
+  <img src="https://github.com/muhammedmustafageldi/My-Github-Files/blob/main/Screnshots/BookTalks/13.png" alt="Swagger UI 3" width="95%"/>
 </p>
 
 </div>
