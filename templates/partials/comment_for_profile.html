@@ -1,0 +1,16 @@
+<div class="card mb-3 shadow-sm user-comment-card">
+    <div class="card-body">
+        <div class="mb-2">
+            <div>
+                <strong>{{ comment.book.title }}</strong>
+                <span class="text-muted small">- {{ comment.created_at.strftime('%d.%m.%Y %H:%M') }}</span>
+            </div>
+            <hr>
+            <p>{{ comment.content }}</p>
+        </div>
+        <hr>
+        <a href="/books/book_details/{{ comment.book.id }}" class="btn book-details-comment-button w-100">
+            Kitaba Git
+        </a>
+    </div>
+</div>

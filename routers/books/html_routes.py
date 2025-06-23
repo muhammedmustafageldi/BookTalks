@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session
 from db.database import SessionLocal
 from starlette import status
 from repositories import book_repository as book_repository
+from repositories import user_repository
 from ..auth.auth_service import validate_current_user, redirect_to_login
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
@@ -47,10 +48,11 @@ async def book_details_render(request: Request, db: Db_Dependency, book_id: int 
             return redirect_to_login()
 
         book = book_repository.get_book_by_id(db, book_id)
+        is_favorite = user_repository.is_book_in_favorites(db, user.get('user_id'), book_id)
 
         sorted_comments = sorted(book.comments, key=lambda c: c.created_at)
 
-        return templates.TemplateResponse("book_details.html", {'request': request, 'book': book, 'user': user, 'author': book.author, 'comments': sorted_comments})
+        return templates.TemplateResponse("book_details.html", {'request': request, 'book': book, 'user': user, 'author': book.author, 'comments': sorted_comments, 'is_favorite': is_favorite})
     except Exception as e:
         print(f"Error: ${e}")
         return redirect_to_login()

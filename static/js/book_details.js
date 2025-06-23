@@ -12,6 +12,7 @@ addEventListener("DOMContentLoaded", () => {
     }
     setupReplyListener()
     setupDeleteListeners()
+    setupFavoriteTransaction()
 })
 
 
@@ -162,6 +163,7 @@ function setupDeleteListeners() {
         if (deleteButton) {
             const comment_id = deleteButton.getAttribute('data-comment-id')
 
+            // Show modal
             const deleteModal = document.getElementById('deleteConfirmModal')
             const bootstrapModal = new bootstrap.Modal(deleteModal)
             bootstrapModal.show()
@@ -205,4 +207,69 @@ function setupDeleteListeners() {
         }
     })
 
+}
+
+function setupFavoriteTransaction () {
+    const favoriteButton = document.getElementById('favoriteButton')
+    const bookDetailDiv = document.getElementById('bookDetails')
+    const book_id = bookDetailDiv.getAttribute('data-book-id')
+
+    favoriteButton.addEventListener('click', async () => {
+        // Get token 
+        const token = getCookie('access_token')
+        if (!token) {
+            logout()
+            return
+        }
+
+        // Check book is favorite
+        const isFavorite = favoriteButton.getAttribute('data-favorite') === '1'
+
+        try {
+            let response 
+
+            if (isFavorite) {
+                // Book is favorite
+                // Remove book from favorite list.
+                response = await fetch(`/api/books/remove_book_from_favorites/?book_id=${book_id}`, {
+                    method: 'POST',
+                    headers: {'Authorization': `Bearer ${token}`}
+                })
+            } else {
+                // Book is not favorite
+                // Add book to favorite list
+                response = await fetch(`/api/books/add_book_to_favorites/?book_id=${book_id}`, {
+                    method: 'POST',
+                    headers: {'Authorization': `Bearer ${token}`}
+                })
+            }
+
+            if (response.ok) {
+                if (isFavorite) {
+                    // Removed from favorite
+                    favoriteButton.setAttribute('data-favorite', '0')
+                    // Change icon
+                    const buttonIcon = favoriteButton.querySelector('i')
+                    buttonIcon.classList.remove('text-warning')
+                    buttonIcon.classList.replace('bi-star-fill', 'bi-star')
+                    favoriteButton.querySelector('span').innerText = 'Favoriye Ekle'
+                } else {
+                    // Added to favorite
+                    favoriteButton.setAttribute('data-favorite', '1')
+                    //Change icon
+                    const buttonIcon = favoriteButton.querySelector('i')
+                    buttonIcon.classList.add('text-warning')
+                    buttonIcon.classList.replace('bi-star', 'bi-star-fill')
+                    favoriteButton.querySelector('span').innerText = 'Favorilerde'
+                }
+
+            } else {
+                alert("İşlem sırasında bir hata oluştu.")
+            }
+
+        } catch (error) {
+            console.error(`Error: ${error}`)
+            alert('Favori işlemi sırasında bir hata oluştu. Lütfen tekrar deneyin.')
+        }
+    })
 }

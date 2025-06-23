@@ -1,0 +1,14 @@
+<div class="card book-card position-relative">
+    <i id="delete-favorite" class="bi bi-trash-fill trash-icon" data-book-id="{{ book.id }}"></i>
+    <div class="row align-items-center">
+        <div class="col-md-3 d-flex justify-content-center">
+            <img src="{{ url_for('images', path=book.image_path) }}" class="img-fluid book-img" alt="...">
+        </div>
+        <div class="col-md-9">
+            <div class="card-body">
+                <h5 class="card-title orange-label">{{ book.title }}</h5>
+                <span class="card-text light-label-color mx-auto"> {{ book.description[:80] }}...</span>
+            </div>
+        </div>
+    </div>
+</div>

@@ -38,7 +38,8 @@ async def all_authors_render(request: Request, db: Db_Dependency):
         authors = repository.get_all_author(db)
         return templates.TemplateResponse('authors.html', {'request': request, 'authors': authors, 'user': user})
 
-    except:
+    except Exception as e:
+        print(f"Exception: ${e}")
         return redirect_to_login()
 
 

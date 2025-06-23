@@ -9,6 +9,7 @@ from helpers import generate_unique_filename
 from starlette import status
 from db.models import Book
 from repositories import book_repository as repository
+from repositories import user_repository
 from ..auth.auth_service import validate_current_user
 
 router = APIRouter(
@@ -96,3 +97,41 @@ async def get_book_details(user: user_dependency, db: Db_Dependency, book_id: in
     if book is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Book is not found.")
     return book
+
+
+@router.post("/add_book_to_favorites/", status_code=status.HTTP_201_CREATED)
+async def add_book_to_favorites(user: user_dependency, db: Db_Dependency, book_id: int = Query(gt=0)):
+    if user is None:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
+    # Book check
+    book = db.query(Book).filter(Book.id == book_id).first()
+    if not book:
+        raise HTTPException(status_code=404, detail="Book not found.")
+    # Check is book in favorite
+    exists = user_repository.is_book_in_favorites(db, user.get('user_id'), book_id)
+    if exists:
+        raise HTTPException(status_code=400, detail="Book is already in favorites.")
+    try:
+        user_repository.add_book_to_favorite(db, user.get('user_id'), book_id)
+    except Exception as e:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=f"An error occurred: {e}")
+
+
+@router.post("/remove_book_from_favorites/", status_code=status.HTTP_200_OK)
+async def remove_book_from_favorites(user: user_dependency, db: Db_Dependency, book_id: int = Query(gt=0)):
+    if user is None:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
+    # Book check
+    book = db.query(Book).filter(Book.id == book_id).first()
+    if not book:
+        raise HTTPException(status_code=404, detail="Book not found.")
+
+    # Check is book in favorite
+    exists = user_repository.is_book_in_favorites(db, user.get('user_id'), book_id)
+    if not exists:
+        raise HTTPException(status_code=400, detail="Book is not in favorites.")
+
+    try:
+        user_repository.remove_book_from_favorite(db, user.get('user_id'), book_id)
+    except Exception as e:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=f"An error occurred: {e}")

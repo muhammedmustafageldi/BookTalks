@@ -1,7 +1,14 @@
 from datetime import datetime, UTC
 from sqlalchemy.orm import relationship
 from db.database import Base
-from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
+from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Table
+
+favorite_books_table = Table(
+    'favorite_books',
+    Base.metadata,
+    Column('user_id', Integer, ForeignKey('users.id'), primary_key=True, index=True),
+    Column('book_id', Integer, ForeignKey('books.id'), primary_key=True, index=True),
+)
 
 
 class User(Base):
@@ -15,6 +22,7 @@ class User(Base):
     image_path = Column(String, default="users/default_user_img.png")
 
     comments = relationship('Comments', back_populates='user')
+    favorite_books = relationship('Book', secondary=favorite_books_table, back_populates='favorite_by')
 
 
 class Book(Base):
@@ -32,6 +40,7 @@ class Book(Base):
 
     author = relationship('Author', back_populates='books')
     comments = relationship('Comments', back_populates='book', cascade='all, delete')
+    favorite_by = relationship('User', secondary=favorite_books_table, back_populates='favorite_books')
 
 class Author(Base):
     __tablename__ = 'authors'

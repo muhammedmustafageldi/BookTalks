@@ -1,7 +1,7 @@
 :root {
     --my-black: black;
     --my-white: #EFEEEA;
-    --my-dark-blue: #273F4F;
+    --my-dark-blue: #1a2a35;
     --my-orange: #FE7743;
     --my-gray: #17181a;
 }
@@ -42,8 +42,3 @@ h1, h2, h3, h4, h5 {
 .custom-navbar {
     background: var(--my-black);
 }
-
-
-
-
-
