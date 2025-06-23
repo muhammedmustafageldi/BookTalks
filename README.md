@@ -24,43 +24,43 @@ BookTalks is a comprehensive book management system that allows users to browse 
 ### Authentication System
 
 <p align="center">
-  ![Register Page](https://github.com/muhammedmustafageldi/My-Github-Files/blob/main/Screnshots/BookTalks/2.png)
-  ![Login Page](https://github.com/muhammedmustafageldi/My-Github-Files/blob/main/Screnshots/BookTalks/1.png)
+  <img src="https://github.com/muhammedmustafageldi/My-Github-Files/blob/main/Screnshots/BookTalks/2.png" alt="Register Page" width="400"/>
+  <img src="https://github.com/muhammedmustafageldi/My-Github-Files/blob/main/Screnshots/BookTalks/1.png" alt="Login Page" width="400"/>
 </p>
 
 ### Book Browsing
 
 <p align="center">
-  ![Main Books Page](https://github.com/muhammedmustafageldi/My-Github-Files/blob/main/Screnshots/BookTalks/3.png)
-  ![Book Details](https://github.com/muhammedmustafageldi/My-Github-Files/blob/main/Screnshots/BookTalks/4.png)
+  <img src="https://github.com/muhammedmustafageldi/My-Github-Files/blob/main/Screnshots/BookTalks/3.png" alt="Main Books Page" width="400"/>
+  <img src="https://github.com/muhammedmustafageldi/My-Github-Files/blob/main/Screnshots/BookTalks/4.png" alt="Book Details" width="400"/>
 </p>
 
 ### Comments System
 
 <p align="center">
-  ![Book Comments 1](https://github.com/muhammedmustafageldi/My-Github-Files/blob/main/Screnshots/BookTalks/5.png)
-  ![Book Comments 2](https://github.com/muhammedmustafageldi/My-Github-Files/blob/main/Screnshots/BookTalks/6.png)
+  <img src="https://github.com/muhammedmustafageldi/My-Github-Files/blob/main/Screnshots/BookTalks/5.png" alt="Book Comments 1" width="400"/>
+  <img src="https://github.com/muhammedmustafageldi/My-Github-Files/blob/main/Screnshots/BookTalks/6.png" alt="Book Comments 2" width="400"/>
 </p>
 
 ### Authors
 
 <p align="center">
-  ![Authors List](https://github.com/muhammedmustafageldi/My-Github-Files/blob/main/Screnshots/BookTalks/7.png)
-  ![Author Details](https://github.com/muhammedmustafageldi/My-Github-Files/blob/main/Screnshots/BookTalks/8.png)
+  <img src="https://github.com/muhammedmustafageldi/My-Github-Files/blob/main/Screnshots/BookTalks/7.png" alt="Authors List" width="400"/>
+  <img src="https://github.com/muhammedmustafageldi/My-Github-Files/blob/main/Screnshots/BookTalks/8.png" alt="Author Details" width="400"/>
 </p>
 
 ### User Profile
 
 <p align="center">
-  ![User Profile Page](https://github.com/muhammedmustafageldi/My-Github-Files/blob/main/Screnshots/BookTalks/10.png)
+  <img src="https://github.com/muhammedmustafageldi/My-Github-Files/blob/main/Screnshots/BookTalks/10.png" alt="User Profile Page" width="400"/>
 </p>
 
 ### API Documentation
 
 <p align="center">
-  ![Swagger UI 1](https://github.com/muhammedmustafageldi/My-Github-Files/blob/main/Screnshots/BookTalks/11.png)
-  ![Swagger UI 2](https://github.com/muhammedmustafageldi/My-Github-Files/blob/main/Screnshots/BookTalks/12.png)
-  ![Swagger UI 3](https://github.com/muhammedmustafageldi/My-Github-Files/blob/main/Screnshots/BookTalks/13.png)
+  <img src="https://github.com/muhammedmustafageldi/My-Github-Files/blob/main/Screnshots/BookTalks/11.png" alt="Swagger UI 1" width="400"/>
+  <img src="https://github.com/muhammedmustafageldi/My-Github-Files/blob/main/Screnshots/BookTalks/12.png" alt="Swagger UI 2" width="400"/>
+  <img src="https://github.com/muhammedmustafageldi/My-Github-Files/blob/main/Screnshots/BookTalks/13.png" alt="Swagger UI 3" width="400"/>
 </p>
 
 ## 🚀 Features
